@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ron Kor Photography</title>
+<meta name="description" content="Travel, landscape and aerial photographs by Ron Kor.">
+<meta property="og:title" content="Ron Kor Photography">
+<meta property="og:description" content="The world, from a different angle.">
+<meta property="og:image" content="/images/1V2A0862.jpg">
+<link rel="icon" href="/images/1V2A0862.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one long scroll story. Pinned stages (hero zoom, word reveal, sideways gallery, aerial wipe) between calm light and dark bands.
+   Deliberately single-look (light page with black bands), so every color is set explicitly here. */
+:root {
+  --paper: #FBFBFD;
+  --mist: #F5F5F7;
+  --ink: #1D1D1F;
+  --ink-soft: #6E6E73;
+  --ink-faint: #86868B;
+  --night: #000000;
+  --night-text: #F5F5F7;
+  --night-soft: #A1A1A6;
+  --blue: #0071E3;
+  --blue-link: #0066CC;
+  --blue-night: #2997FF;
+  --line: #D2D2D7;
+  --font: -apple-system, BlinkMacSystemFont, "Geist", "Helvetica Neue", Arial, sans-serif;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.47; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: rgba(251,251,253,0.8); }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { text-wrap: balance; margin: 0; letter-spacing: -0.03em; line-height: 1.05; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--blue-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+button { font: inherit; letter-spacing: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.eyebrow { font-size: 19px; font-weight: 600; color: var(--ink-soft); margin-bottom: 10px; }
+.more { font-size: 19px; display: inline-block; padding-block: 10px; }
+
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(251,251,253,0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+.nav .wrap { display: flex; justify-content: space-between; align-items: center; min-height: 48px; gap: 24px; }
+.nav .brand { color: var(--ink); font-weight: 600; font-size: 17px; padding-block: 12px; }
+.nav ul { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; font-size: 13px; }
+.nav ul a { color: var(--ink); opacity: 0.85; padding-block: 14px; display: inline-block; }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--blue); transform-origin: 0 50%; transform: scaleX(0); }
+@media (max-width: 560px) { .nav ul { gap: 16px; } .nav ul li.hide-s { display: none; } }
+
+/* 1 · Hero zoom */
+.hero { height: 240vh; position: relative; }
+.hero .stage { position: sticky; top: 48px; height: calc(100vh - 48px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden; }
+.hero .head { text-align: center; padding: 7vh var(--gutter-r) 4vh var(--gutter-l); will-change: transform, opacity; }
+.hero h1 { font-size: clamp(44px, 7.2vw, 96px); }
+.hero .sub { margin-top: 16px; font-size: clamp(19px, 2vw, 24px); color: var(--ink-soft); }
+.hero .frame { position: absolute; left: 50%; bottom: 0; width: 100vw; height: 100%; transform: translateX(-50%); display: flex; align-items: flex-end; justify-content: center; pointer-events: none; }
+.hero .photo { width: 100%; height: 58%; clip-path: inset(0 19% 0 19% round 28px); will-change: clip-path, height; position: relative; }
+.hero .photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero .cap { position: absolute; left: 0; right: 0; bottom: 6vh; text-align: center; color: #FFFFFF; opacity: 0; text-shadow: 0 1px 24px rgba(0,0,0,0.35); }
+.hero .cap strong { display: block; font-size: clamp(32px, 5vw, 64px); letter-spacing: -0.03em; line-height: 1.05; }
+.hero .cap span { font-size: 19px; opacity: 0.9; }
+@media (max-width: 760px) { .hero .photo { clip-path: inset(0 6% 0 6% round 22px); } }
+
+/* 2 · Word reveal */
+.reveal { height: 220vh; position: relative; }
+.reveal .stage { position: sticky; top: 48px; height: calc(100vh - 48px); display: flex; align-items: center; }
+.reveal p { font-size: clamp(30px, 4.6vw, 60px); font-weight: 600; line-height: 1.12; letter-spacing: -0.025em; max-width: 1000px; }
+.reveal .w { color: var(--ink-faint); transition: color 250ms ease; }
+.reveal .w.on { color: var(--ink); }
+
+/* 3 · Sideways gallery */
+.places { position: relative; background: var(--mist); }
+.places.pinned { height: 420vh; }
+.places .stage { padding-block: 72px; }
+.places.pinned .stage { position: sticky; top: 48px; height: calc(100vh - 48px); overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding-block: 0; }
+.places .intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 32px; flex-wrap: wrap; margin-bottom: 4vh; }
+.places h2 { font-size: clamp(40px, 6vw, 80px); }
+.places .count { font-size: 15px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.track { display: flex; gap: 24px; padding-left: var(--gutter-l); padding-right: var(--gutter-r); will-change: transform; }
+.places:not(.pinned) .track { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+.card { flex: 0 0 auto; width: min(78vw, 46vh, 520px); scroll-snap-align: center; }
+.card.wide { width: min(86vw, 82vh, 920px); }
+.card .pic { border-radius: 24px; overflow: hidden; background: var(--line); aspect-ratio: 4 / 5; }
+.card.wide .pic { aspect-ratio: 16 / 10; }
+.card img { width: 100%; height: 100%; object-fit: cover; }
+.card h3 { font-size: 24px; letter-spacing: -0.02em; margin-top: 16px; }
+.card p { color: var(--ink-soft); font-size: 15px; margin-top: 2px; }
+
+/* 4 · From above */
+.above { background: var(--night); color: var(--night-text); position: relative; height: 380vh; }
+.above .stage { position: sticky; top: 48px; height: calc(100vh - 48px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; padding-left: var(--gutter-l); padding-right: var(--gutter-r); max-width: 1380px; margin: 0 auto; }
+.above .eyebrow { color: var(--night-soft); }
+.above h2 { font-size: clamp(44px, 6.4vw, 88px); }
+.above .lede { font-size: 21px; color: var(--night-soft); margin-top: 18px; max-width: 420px; }
+.above .where { margin-top: 32px; display: flex; flex-direction: column; gap: 6px; font-size: 19px; }
+.above .where li { color: #6E6E73; transition: color 300ms ease; list-style: none; }
+.above .where li.on { color: var(--night-text); }
+.above .where ul { margin: 0; padding: 0; display: grid; gap: 6px; }
+.above .stack { position: relative; aspect-ratio: 4 / 3; border-radius: 28px; overflow: hidden; background: #1C1C1E; }
+.above .stack img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: clip-path, transform; }
+@media (max-width: 860px) {
+  .above .stage { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 24px; }
+  .above .lede, .above .where { display: none; }
+  .above .stack { aspect-ratio: 4 / 5; max-height: 58vh; width: 100%; }
+}
+
+/* 5 · Grid with filters */
+.work { padding-block: 120px 96px; }
+.work .top { text-align: center; }
+.work h2 { font-size: clamp(40px, 5.6vw, 72px); }
+.work .top p { margin-top: 12px; font-size: 21px; color: var(--ink-soft); }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 36px 0 44px; }
+.chip { min-height: 44px; padding: 0 22px; border-radius: 980px; font-size: 15px; font-weight: 500; background: #E8E8ED; color: var(--ink); transition: background-color 200ms ease, color 200ms ease; }
+.chip[aria-pressed="true"] { background: var(--ink); color: #FFFFFF; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px 24px; }
+.tile { display: block; width: 100%; text-align: left; }
+.tile .pic { border-radius: 20px; overflow: hidden; background: var(--line); aspect-ratio: 4 / 5; }
+.tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
+.tile:hover img { transform: scale(1.04); }
+.tile h3 { font-size: 19px; letter-spacing: -0.015em; margin-top: 14px; }
+.tile p { font-size: 15px; color: var(--ink-soft); }
+.rise { transition: opacity 700ms ease, transform 700ms cubic-bezier(.2,.7,.2,1); }
+.rise.pre { opacity: 0; transform: translateY(32px); }
+
+/* 6 · Two-up tiles with parallax */
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 12px; padding-block: 12px; }
+.duo a { display: block; background: var(--mist); border-radius: 28px; overflow: hidden; text-align: center; color: var(--ink); }
+.duo a:hover { text-decoration: none; }
+.duo .txt { padding: 52px 24px 28px; }
+.duo h3 { font-size: clamp(32px, 3.4vw, 44px); }
+.duo .txt p { font-size: 19px; color: var(--ink-soft); margin: 8px 0 12px; }
+.duo .txt span { color: var(--blue-link); font-size: 17px; }
+.duo .pic { aspect-ratio: 4 / 3; overflow: hidden; }
+.duo .pic img { width: 100%; height: 118%; object-fit: cover; will-change: transform; }
+
+/* 7 · About & contact */
+.about { text-align: center; padding-block: 130px 100px; }
+.about img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; object-position: 28% 40%; margin: 0 auto 28px; }
+.about h2 { font-size: clamp(40px, 5.6vw, 72px); }
+.about p { max-width: 640px; margin: 20px auto 0; font-size: 21px; line-height: 1.43; color: var(--ink-soft); }
+.contact { background: var(--mist); text-align: center; padding-block: 110px; }
+.contact h2 { font-size: clamp(40px, 5.6vw, 72px); }
+.contact .lede { margin: 14px auto 32px; font-size: 21px; color: var(--ink-soft); }
+.mail { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
+.mail code { font-family: var(--font); font-size: clamp(22px, 3vw, 32px); font-weight: 600; color: var(--ink); user-select: all; }
+.btn { min-height: 44px; padding: 0 22px; border-radius: 980px; background: var(--blue); color: #FFFFFF; font-size: 15px; font-weight: 500; }
+.btn:hover { background: #0077ED; text-decoration: none; }
+.btn-lg { display: inline-flex; align-items: center; min-height: 52px; padding: 0 34px; font-size: 19px; margin-bottom: 22px; }
+.mail { display: flex; }
+.mail code { font-size: 19px; font-weight: 500; color: var(--ink-soft); }
+.copy { color: var(--blue-link); font-size: 17px; min-height: 44px; padding: 0 6px; }
+.copy:hover { text-decoration: underline; }
+.contact .ig { margin-top: 20px; }
+footer { padding-block: 22px 40px; font-size: 12px; color: var(--ink-soft); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+/* Lightbox */
+dialog.lb { border: 0; padding: 0; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; background: rgba(0,0,0,0.94); color: var(--night-text); }
+dialog.lb::backdrop { background: rgba(0,0,0,0.9); }
+.lb .inner { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: max(56px, env(safe-area-inset-top, 0px)) var(--gutter-r) max(32px, env(safe-area-inset-bottom, 0px)) var(--gutter-l); }
+.lb img { max-height: calc(100vh - 170px); width: auto; border-radius: 12px; }
+.lb .meta { font-size: 17px; text-align: center; }
+.lb .meta span { color: var(--night-soft); display: block; font-size: 15px; }
+.lb .ctrl { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); display: flex; gap: 8px; }
+.lb .ctrl button { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.14); color: #FFFFFF; display: grid; place-items: center; }
+.lb .ctrl button:hover { background: rgba(255,255,255,0.24); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .hero, .reveal, .above { height: auto; }
+  .hero .stage, .reveal .stage, .above .stage { position: relative; top: 0; height: auto; }
+  .hero .frame { position: relative; transform: none; left: 0; height: 60vh; }
+  .hero .photo { height: 100%; }
+  .reveal .stage { padding-block: 120px; }
+  .reveal .w { color: var(--ink); }
+  .above .stage { padding-block: 96px; }
+  .rise.pre { opacity: 1; transform: none; }
+}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">Ron Kor</a>
+    <ul>
+      <li><a href="#places">Places</a></li>
+      <li class="hide-s"><a href="#above">From Above</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="progress" id="progress"></div>
+</nav>
+
+<main id="top">
+  <section class="hero" data-stage="hero" aria-label="Introduction">
+    <div class="stage">
+      <div class="head">
+        <p class="eyebrow">Photography</p>
+        <h1>Mountains, coasts<br>and city lines.</h1>
+        <p class="sub">Travel, landscape and aerial photographs by Ron Kor.</p>
+      </div>
+      <div class="frame">
+        <div class="photo" id="heroPhoto">
+          <img src="images/1V2A0862.jpg" alt="Mountain lake reflecting snow-capped peaks under clouds" fetchpriority="high">
+          <div class="cap" id="heroCap"><strong>Canadian Rockies</strong><span>Scroll to begin</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" data-stage="reveal" aria-label="Statement">
+    <div class="stage">
+      <div class="wrap">
+        <p id="words">I chase the hour when a place goes quiet. Glacier water at first light, a cliff town turning gold, a road drawn across the hills. These are the frames that made the trip.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="places" id="places" data-stage="places" aria-label="Places">
+    <div class="stage">
+      <div class="wrap intro">
+        <div>
+          <p class="eyebrow">Places</p>
+          <h2>Where the light was.</h2>
+        </div>
+        <p class="count" id="count">01 / 07</p>
+      </div>
+      <div class="track" id="track">
+        <figure class="card"><div class="pic"><img loading="lazy" decoding="async" src="images/1V2A09272.jpg" alt="Canoe on a turquoise glacial lake"></div><h3>Lake Louise</h3><p>Alberta, Canada</p></figure>
+        <figure class="card wide"><div class="pic"><img loading="lazy" decoding="async" src="images/1V2A1665.jpg" alt="Lakeside village with a church spire beneath steep mountains"></div><h3>Hallstatt</h3><p>Upper Austria</p></figure>
+        <figure class="card"><div class="pic"><img loading="lazy" decoding="async" src="images/DJI_0410.jpg" alt="Colorful cliffside village above a harbor of small boats"></div><h3>Riomaggiore</h3><p>Cinque Terre, Italy</p></figure>
+        <figure class="card wide"><div class="pic"><img loading="lazy" decoding="async" src="images/DJI_0974.jpg" alt="Rocky islet with a winding path into the sea"></div><h3>Gaztelugatxe</h3><p>Basque Coast, Spain</p></figure>
+        <figure class="card"><div class="pic"><img loading="lazy" decoding="async" src="images/1V2A14772.jpg" alt="Yellow escalator under a diamond-grid glass ceiling"></div><h3>Central Library</h3><p>Seattle, USA</p></figure>
+        <figure class="card"><div class="pic"><img loading="lazy" decoding="async" src="images/P6280873.jpg" alt="Two tall sea stacks rising from calm water"></div><h3>Sea stacks</h3><p>Coast</p></figure>
+        <figure class="card wide"><div class="pic"><img loading="lazy" decoding="async" src="images/SriLanka.jpg" alt="Lighthouse on a rocky point above the sea"></div><h3>Lighthouse point</h3><p>Sri Lanka</p></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="above" id="above" data-stage="above" aria-label="From above">
+    <div class="stage">
+      <div>
+        <p class="eyebrow">Aerial</p>
+        <h2>From above.</h2>
+        <p class="lede">Old towns, coastlines and quiet roads, seen the way the map sees them.</p>
+        <div class="where"><ul id="aboveList">
+          <li class="on">Val d'Orcia, Tuscany</li>
+          <li>Bellagio, Lake Como</li>
+          <li>Florence, Italy</li>
+          <li>Coastline</li>
+        </ul></div>
+      </div>
+      <div class="stack" id="aboveStack">
+        <img src="images/DJI_0460.jpg" alt="Cypress-lined road through Tuscan hills from above" loading="lazy" decoding="async">
+        <img src="images/DJI_0316.jpg" alt="Lakeside town at dusk from above" loading="lazy" decoding="async">
+        <img src="images/DJI_05001.jpg" alt="Florence and its cathedral dome from above" loading="lazy" decoding="async">
+        <img src="images/DJI_0611.jpg" alt="Rocky coastline and deep blue sea from above" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work" aria-label="All work">
+    <div class="wrap">
+      <div class="top">
+        <h2>The work.</h2>
+        <p>Pick a place to start. Tap any photo to see it large.</p>
+      </div>
+      <div class="chips" role="group" aria-label="Filter photos by category" id="chips"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="duo">
+      <a href="#work" data-cat="mountains" class="duo-link">
+        <div class="txt"><h3>Canadian Rockies</h3><p>Glacier lakes and endless pines.</p><span>See the series ›</span></div>
+        <div class="pic"><img loading="lazy" decoding="async" src="images/1V2A0531-Edit.jpg" alt="Turquoise glacial lake winding through a forested valley" data-parallax></div>
+      </a>
+      <a href="#work" data-cat="cities" class="duo-link">
+        <div class="txt"><h3>Lines and light</h3><p>Libraries, tunnels and towers.</p><span>See the series ›</span></div>
+        <div class="pic"><img loading="lazy" decoding="async" src="images/1V2A1778-Edit.jpg" alt="Symmetrical walkway under red and yellow ceiling slats" data-parallax></div>
+      </a>
+    </div>
+  </div>
+
+  <section class="about" id="about" aria-label="About">
+    <div class="wrap">
+      <img loading="lazy" decoding="async" src="images/5N2A0380.jpg" alt="Portrait of Ron Kor on a rooftop">
+      <h2>The world, from a different angle.</h2>
+      <p>I'm Ron, a photographer based in Israel. I photograph landscapes from the ground and from above, looking for the details that make each place feel like itself.</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-label="Contact">
+    <div class="wrap">
+      <h2>Did a photo catch your eye?</h2>
+      <p class="lede">Get in touch about prints, photography projects, or collaborations.</p>
+      <a class="btn btn-lg" href="mailto:ron.kor97@gmail.com">Email me</a>
+      <div class="mail">
+        <code id="email">ron.kor97@gmail.com</code>
+        <button class="copy" type="button" id="copy">Copy email</button>
+      </div>
+      <p class="ig"><a class="more" href="https://www.instagram.com/ron__core/">Follow @ron__core on Instagram ›</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Ron Kor. All photographs are the property of the photographer.</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Photo viewer">
+  <div class="ctrl">
+    <button type="button" id="lbPrev" aria-label="Previous photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button type="button" id="lbNext" aria-label="Next photo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button type="button" id="lbClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="inner">
+    <img id="lbImg" src="images/1V2A0862.jpg" alt="">
+    <p class="meta" id="lbMeta"></p>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+  var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+
+  /* ---------- photo data ---------- */
+  var P = [
+    ['1V2A09272', 'Lake Louise', 'Alberta, Canada', 'mountains', 'Canoe on a turquoise glacial lake'],
+    ['DJI_0974', 'Gaztelugatxe', 'Basque Coast, Spain', 'coast', 'Rocky islet with a winding path into the sea'],
+    ['1V2A14772', 'Central Library', 'Seattle, USA', 'cities', 'Yellow escalator under a glass grid ceiling'],
+    ['1V2A1665', 'Hallstatt', 'Upper Austria', 'mountains', 'Lakeside village beneath steep mountains'],
+    ['DJI_0410', 'Riomaggiore', 'Cinque Terre, Italy', 'above', 'Colorful cliffside village above a harbor'],
+    ['P6280873', 'Sea stacks', 'Coast', 'coast', 'Two tall sea stacks rising from calm water'],
+    ['1V2A1778-Edit', 'Red corridor', 'Architecture', 'cities', 'Walkway under red and yellow ceiling slats'],
+    ['1V2A0454', 'Emerald Lake', 'British Columbia, Canada', 'mountains', 'Wooden lodge reflected in a forest lake'],
+    ['DJI_05001', 'Florence', 'Tuscany, Italy', 'above', 'Florence and its cathedral dome from above'],
+    ['SriLanka', 'Lighthouse point', 'Sri Lanka', 'coast', 'Lighthouse on a rocky point above the sea'],
+    ['1V2A1768Canvas2', 'Skyline at dusk', 'City', 'cities', 'City skyline from above at sunset'],
+    ['P6290898', 'Volcano', 'Mountains', 'mountains', 'Snow-streaked volcano above pine trees'],
+    ['IMG_0624', 'Against the tide', 'Coast', 'coast', 'Lone figure on rocks as a wave breaks below'],
+    ['1V2A14312', 'The library', 'Architecture', 'cities', 'Ornate baroque library hall with painted ceilings'],
+    ['DJI_0018-Landscape', 'Shoreline', 'From above', 'above', 'Waves meeting a sandy beach from above'],
+    ['1V2A0524', 'Peyto Lake', 'Alberta, Canada', 'mountains', 'Turquoise lake seen through pine trees'],
+    ['1V2A1295', 'Underground', 'Architecture', 'cities', 'Person in a symmetrical white subway tunnel'],
+    ['DJI_0316', 'Bellagio', 'Lake Como, Italy', 'above', 'Lakeside town at dusk from above'],
+    ['1V2A0531-Edit', 'Peyto Lake, wide', 'Alberta, Canada', 'mountains', 'Turquoise glacial lake winding through a forested valley'],
+    ['DJI_0611', 'Coastline', 'From above', 'above', 'Rocky coastline and deep blue sea from above']
+  ];
+  var CATS = [['all', 'All'], ['mountains', 'Mountains'], ['coast', 'Coast'], ['cities', 'Cities'], ['above', 'From above']];
+  var cat = 'all';
+  try { cat = localStorage.getItem('rk-cat') || 'all'; } catch (e) {}
+  var shown = [];
+
+  var chips = document.getElementById('chips');
+  var grid = document.getElementById('grid');
+  CATS.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = c[1]; b.dataset.cat = c[0];
+    b.addEventListener('click', function () { setCat(c[0]); });
+    chips.appendChild(b);
+  });
+  function setCat(c) {
+    cat = c;
+    try { localStorage.setItem('rk-cat', c); } catch (e) {}
+    render();
+  }
+  function render() {
+    chips.querySelectorAll('.chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cat === cat ? 'true' : 'false'); });
+    shown = cat === 'all' ? P.slice(0, 12) : P.filter(function (p) { return p[3] === cat; });
+    grid.innerHTML = '';
+    shown.forEach(function (p, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tile rise';
+      b.setAttribute('aria-label', 'Open ' + p[1] + ' large');
+      b.innerHTML = '<div class="pic"><img loading="lazy" decoding="async" alt=""></div><h3></h3><p></p>';
+      var img = b.querySelector('img'); img.src = 'images/' + p[0] + '.jpg'; img.alt = p[4];
+      b.querySelector('h3').textContent = p[1];
+      b.querySelector('p').textContent = p[2];
+      b.addEventListener('click', function () { openLb(i); });
+      grid.appendChild(b);
+    });
+    watchRise();
+  }
+
+  /* ---------- fade-up on enter (only for items still below the fold) ---------- */
+  var io = ('IntersectionObserver' in window && !reduce) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' }) : null;
+  function watchRise() {
+    if (!io) return;
+    document.querySelectorAll('.rise').forEach(function (el, i) {
+      if (el.getBoundingClientRect().top > innerHeight) {
+        el.classList.add('pre');
+        el.style.transitionDelay = (i % 3) * 80 + 'ms';
+        io.observe(el);
+      }
+    });
+  }
+  render();
+
+  document.querySelectorAll('.duo-link').forEach(function (a) {
+    a.addEventListener('click', function () { setCat(a.dataset.cat); });
+  });
+
+  /* ---------- lightbox ---------- */
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbMeta = document.getElementById('lbMeta'), cur = 0;
+  function show(i) {
+    cur = (i + shown.length) % shown.length;
+    var p = shown[cur];
+    lbImg.src = 'images/' + p[0] + '.jpg'; lbImg.alt = p[4];
+    lbMeta.innerHTML = '';
+    lbMeta.appendChild(document.createTextNode(p[1]));
+    var s = document.createElement('span'); s.textContent = p[2] + ' · ' + (cur + 1) + ' of ' + shown.length; lbMeta.appendChild(s);
+  }
+  function openLb(i) { show(i); if (lb.showModal) lb.showModal(); else lb.setAttribute('open', ''); }
+  document.getElementById('lbClose').addEventListener('click', function () { lb.close(); });
+  document.getElementById('lbPrev').addEventListener('click', function () { show(cur - 1); });
+  document.getElementById('lbNext').addEventListener('click', function () { show(cur + 1); });
+  lb.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('inner')) lb.close(); });
+
+  /* ---------- copy email ---------- */
+  var copyBtn = document.getElementById('copy');
+  copyBtn.addEventListener('click', function () {
+    var t = document.getElementById('email').textContent;
+    var done = function () { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1600); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(document.getElementById('email')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected, press ⌘C'; };
+    try { navigator.clipboard.writeText(t).then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  /* ---------- word reveal setup ---------- */
+  var wordsEl = document.getElementById('words');
+  var words = wordsEl.textContent.trim().split(/\s+/);
+  wordsEl.innerHTML = '';
+  words.forEach(function (w, i) {
+    var s = document.createElement('span'); s.className = 'w'; s.textContent = w;
+    wordsEl.appendChild(s);
+    if (i < words.length - 1) wordsEl.appendChild(document.createTextNode(' '));
+  });
+  var wordEls = wordsEl.querySelectorAll('.w');
+
+  if (reduce) return;
+
+  /* ---------- scroll engine ---------- */
+  var heroSec = document.querySelector('[data-stage="hero"]');
+  var heroPhoto = document.getElementById('heroPhoto');
+  var heroHead = document.querySelector('.hero .head');
+  var heroCap = document.getElementById('heroCap');
+  var revealSec = document.querySelector('[data-stage="reveal"]');
+  var placesSec = document.querySelector('[data-stage="places"]');
+  var track = document.getElementById('track');
+  var count = document.getElementById('count');
+  var aboveSec = document.querySelector('[data-stage="above"]');
+  var aboveImgs = document.querySelectorAll('#aboveStack img');
+  var aboveLis = document.querySelectorAll('#aboveList li');
+  var bar = document.getElementById('progress');
+  var para = document.querySelectorAll('[data-parallax]');
+  var cards = track.querySelectorAll('.card');
+
+  function pinOk() { return innerWidth > 760; }
+  function setPin() { placesSec.classList.toggle('pinned', pinOk()); if (!pinOk()) track.style.transform = ''; }
+  setPin();
+
+  function prog(sec) {
+    var r = sec.getBoundingClientRect();
+    var span = r.height - innerHeight;
+    return span > 0 ? clamp(-r.top / span, 0, 1) : 0;
+  }
+
+  function frame() {
+    ticking = false;
+    var doc = document.documentElement;
+    bar.style.transform = 'scaleX(' + clamp(scrollY / (doc.scrollHeight - innerHeight), 0, 1) + ')';
+
+    /* hero: card grows to full bleed, headline lifts away, caption arrives */
+    var h = prog(heroSec), e = ease(clamp(h / 0.75, 0, 1));
+    var side = innerWidth > 760 ? 19 : 6;
+    var inset = lerp(side, 0, e), rad = lerp(28, 0, e);
+    heroPhoto.style.clipPath = 'inset(0 ' + inset + '% 0 ' + inset + '% round ' + rad + 'px)';
+    heroPhoto.style.height = lerp(58, 100, e) + '%';
+    heroHead.style.opacity = 1 - clamp(h / 0.35, 0, 1);
+    heroHead.style.transform = 'translateY(' + (-60 * clamp(h / 0.5, 0, 1)) + 'px) scale(' + (1 - 0.06 * clamp(h / 0.5, 0, 1)) + ')';
+    heroCap.style.opacity = clamp((h - 0.55) / 0.25, 0, 1);
+    heroPhoto.querySelector('img').style.transform = 'scale(' + lerp(1.12, 1, e) + ')';
+
+    /* word reveal */
+    var r = prog(revealSec), lit = Math.round(clamp(r / 0.85, 0, 1) * wordEls.length);
+    for (var i = 0; i < wordEls.length; i++) wordEls[i].classList.toggle('on', i < lit);
+
+    /* sideways gallery */
+    if (pinOk()) {
+      var pp = prog(placesSec);
+      var max = track.scrollWidth - innerWidth;
+      track.style.transform = 'translate3d(' + (-max * pp) + 'px,0,0)';
+      var idx = Math.min(cards.length, Math.floor(pp * cards.length) + 1);
+      count.textContent = String(idx).padStart(2, '0') + ' / ' + String(cards.length).padStart(2, '0');
+    }
+
+    /* from above: each photo wipes up over the last */
+    var a = prog(aboveSec), n = aboveImgs.length, seg = a * (n - 1);
+    aboveImgs.forEach(function (img, k) {
+      if (k === 0) { img.style.transform = 'scale(' + lerp(1.15, 1, clamp(a * 2, 0, 1)) + ')'; return; }
+      var t = ease(clamp(seg - (k - 1), 0, 1));
+      img.style.clipPath = 'inset(' + (100 - t * 100) + '% 0 0 0)';
+      img.style.transform = 'scale(' + lerp(1.18, 1, t) + ')';
+    });
+    var active = Math.min(n - 1, Math.round(seg));
+    aboveLis.forEach(function (li, k) { li.classList.toggle('on', k === active); });
+
+    /* parallax tiles */
+    para.forEach(function (img) {
+      var rc = img.parentNode.getBoundingClientRect();
+      var t = clamp((innerHeight - rc.top) / (innerHeight + rc.height), 0, 1);
+      img.style.transform = 'translate3d(0,' + (-15 * t) + '%,0)';
+    });
+  }
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', function () { setPin(); onScroll(); });
+  frame();
+})();
+</script>
+
+</body>
+</html>
